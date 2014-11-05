@@ -15,9 +15,9 @@ setup(
     install_requires=[
         'arrow',
         'gevent',
-        'mongokit',
         'schedule',
-        'whoosh',
+        'twitter',
+        'Whoosh',
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',
