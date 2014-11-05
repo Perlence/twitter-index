@@ -3,5 +3,9 @@
     "CONSUMER_SECRET": "",
     "ACCESS_TOKEN": "",
     "ACCESS_TOKEN_SECRET": "",
-    "WHOOSH_INDEX_PATH": "~/.twitterindex"
+    "WHOOSH_INDEX_PATH": "~/.twitterindex",
+    "FAVORITES_LAST_ID": null,
+    "HOME_TIMELINE_LAST_ID": null,
+    "HISTORY_HOME_TIMELINE_MAX_ID": null,
+    "HISTORY_FAVORITES_MAX_ID": null
 }

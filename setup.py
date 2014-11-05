@@ -15,6 +15,7 @@ setup(
     install_requires=[
         'arrow',
         'gevent',
+        'logbook',
         'schedule',
         'twitter',
         'Whoosh',
