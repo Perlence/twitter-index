@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='twitter-index',
-    description='Index home feed and favorite tweets.',
+    description='Index your home timeline and favorited tweets.',
     version='0.1.0',
     author='Sviatoslav Abakumov',
     author_email='dust.harvesting@gmail.com',
@@ -12,11 +12,17 @@ setup(
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
+    entry_points={
+        'console_scripts': [
+            'tiworker = twitterindex.worker:main',
+        ],
+    },
     install_requires=[
         'arrow',
         'gevent',
         'logbook',
         'schedule',
+        'termcolor',
         'twitter',
         'Whoosh',
     ],
