@@ -57,3 +57,9 @@ target/
 *.sublime-workspace
 
 config.json
+
+bower_components/
+
+.webassets-cache
+twitterindex/static/*.css
+twitterindex/static/*.js

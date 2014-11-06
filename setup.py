@@ -3,8 +3,8 @@ from setuptools import setup, find_packages
 setup(
     name='twitter-index',
     description='Index your home timeline and favorited tweets.',
-    version='0.1.0',
-    author='Sviatoslav Abakumov',
+    version='0.1',
+    author='Sviatoslav Abakumov, Anastasiya Kozayeva',
     author_email='dust.harvesting@gmail.com',
     url='https://github.com/Perlence/twitter-index',
     platforms=['MacOS X', 'Unix', 'POSIX'],
@@ -15,10 +15,14 @@ setup(
     entry_points={
         'console_scripts': [
             'tiworker = twitterindex.worker:main',
+            'startapp = twitterindex.app:start',
+            'debugapp = twitterindex.app:debug',
         ],
     },
     install_requires=[
         'arrow',
+        'Flask',
+        'Flask-Assets',
         'gevent',
         'logbook',
         'termcolor',

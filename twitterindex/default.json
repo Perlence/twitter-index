@@ -1,4 +1,8 @@
 {
+    "HOST": null,
+    "PORT": 5000,
+    "SECRET_KEY": "",
+
     "CONSUMER_KEY": "",
     "CONSUMER_SECRET": "",
     "ACCESS_TOKEN": "",
