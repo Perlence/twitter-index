@@ -1,6 +1,6 @@
 import os
 
-from whoosh.index import create_in
+from whoosh.index import create_in, open_dir
 from whoosh.fields import Schema, ID, TEXT, BOOLEAN, NUMERIC, DATETIME
 
 from . import config
@@ -65,8 +65,9 @@ else:
 
 try:
     os.mkdir(dirname)
+    TweetIndex = create_in(dirname, TweetSchema)
 except OSError as e:
-    if e.errno != 17:  # unless 'File exists'
+    # raise unless 'File exists'
+    if e.errno != 17:
         raise
-
-TweetIndex = create_in(dirname, TweetSchema)
+    TweetIndex = open_dir(dirname)
