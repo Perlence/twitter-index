@@ -21,8 +21,9 @@ setup(
     },
     install_requires=[
         'arrow',
-        'Flask',
-        'Flask-Assets',
+        'flask',
+        'flask-assets',
+        'flask-restful',
         'gevent',
         'logbook',
         'termcolor',

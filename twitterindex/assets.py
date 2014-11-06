@@ -15,6 +15,8 @@ def init_app(app):
         Bundle(
             'jquery/dist/jquery.js',
             'bootstrap-sass-official/assets/javascripts/bootstrap.js',
+            'underscore/underscore.js',
+            'backbone/backbone.js',
             output='js_requirements.js'),
         Bundle(
             'index.coffee',
