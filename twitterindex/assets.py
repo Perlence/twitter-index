@@ -17,6 +17,7 @@ def init_app(app):
             'bootstrap-sass-official/assets/javascripts/bootstrap.js',
             'underscore/underscore.js',
             'backbone/backbone.js',
+            'moment/min/moment-with-locales.js',
             output='js_requirements.js'),
         Bundle(
             'index.coffee',

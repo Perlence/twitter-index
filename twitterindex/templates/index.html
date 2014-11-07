@@ -7,7 +7,7 @@
 {% block body %}
   <div id="twitter-index-app" class="container">
     <div id="search" class="input-group">
-      <input id="input" class="form-control input-lg" type="text" />
+      <input id="input" class="form-control input-lg" type="text" autofocus/>
       <span class="input-group-btn">
         <button id="submit" class="btn btn-default btn-lg" type="button">Search</button>
       </span>
@@ -21,12 +21,17 @@
   {{ super() }}
   <script type="text/template" id="tweet">
     <div class="media tweet">
-      <a class="media-left" href="#">
+      <a class="media-left" href="https://twitter.com/<%- user.screen_name %>">
         <img src="<%- user.profile_image_url %>" alt="" />
       </a>
       <div class="media-body">
-        <h4 class="media-heading"><%= user.name %></h4>
-        <%= text %>
+        <h4 class="media-heading">
+          <a href="https://twitter.com/<%- user.screen_name %>"><%= user.name %> <small>@<%= user.screen_name %></small></a>
+          <small>
+            · <a href="https://twitter.com/<%- user.screen_name %>/status/<%- id_str %>"><%= created_at.from() %></a>
+          </small>
+        </h4>
+        <p><%= text %></p>
       </div>
     </div>
   </script>

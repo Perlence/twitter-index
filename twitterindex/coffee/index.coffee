@@ -1,10 +1,16 @@
 $ ->
   Tweet = Backbone.Model.extend
     defaults: ->
-      created_at: new Date()
+      id_str: '500000000000000000'
+      created_at: moment()
       text: ''
       user:
         name: 'User Name'
+        screen_name: 'username'
+
+    parse: (response, options) ->
+      response.created_at = moment.utc(response.created_at.$date)
+      return response
 
 
   Query = Backbone.Model.extend
@@ -17,7 +23,8 @@ $ ->
       this.listenTo(this, 'change:tweets', this.populateResults)
 
     populateResults: ->
-      tweets.reset(this.get('tweets').map (tweet) -> new Tweet(tweet))
+      tweets.reset this.get('tweets').map (tweet) ->
+        new Tweet(tweet, parse: true)
 
 
   TweetList = Backbone.Collection.extend
