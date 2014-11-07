@@ -3,6 +3,12 @@
     "PORT": 5000,
     "SECRET_KEY": "",
 
+    "MONGODB_DB": "twitterindex",
+    "MONGODB_HOST": "127.0.0.1",
+    "MONGODB_PORT": 27017,
+    "MONGODB_USERNAME": null,
+    "PASSWORD": null,
+
     "CONSUMER_KEY": "",
     "CONSUMER_SECRET": "",
     "ACCESS_TOKEN": "",

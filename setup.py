@@ -26,9 +26,10 @@ setup(
         'flask-restful',
         'gevent',
         'logbook',
+        'mongoengine',
         'termcolor',
         'twitter',
-        'Whoosh',
+        'whoosh',
     ],
     classifiers=[
         'Development Status :: 3 - Alpha',

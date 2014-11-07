@@ -5,12 +5,13 @@ from functools import partial
 
 import arrow
 import twitter
+import mongoengine
 from gevent import spawn, sleep, joinall
 from logbook import Logger, StderrHandler
 from termcolor import colored
 
 from . import config
-from .models import TweetIndex
+from .models import Tweet, TweetIndex
 
 
 def logger_formatter(record, handler):
@@ -32,6 +33,10 @@ handler = StderrHandler()
 handler.formatter = logger_formatter
 logger.handlers.append(handler)
 
+mongoengine.connect(db=config.MONGODB_DB, host=config.MONGODB_HOST,
+                    port=config.MONGODB_PORT, username=config.MONGODB_USERNAME,
+                    password=config.PASSWORD)
+
 oauth = twitter.OAuth(config.ACCESS_TOKEN, config.ACCESS_TOKEN_SECRET,
                       config.CONSUMER_KEY, config.CONSUMER_SECRET)
 api = twitter.Twitter(auth=oauth)
@@ -40,16 +45,15 @@ INTERVAL = 60  # 15 calls in 15 minutes
 
 
 def store(statuses):
-    writer = TweetIndex.writer()
-    names = TweetIndex.schema.names()
-    for status in statuses:
-        filtered_status = {name: status.get(name) for name in names}
-        created_at = arrow.get(filtered_status['created_at'],
-                               'ddd MMM DD HH:mm:ss ZZ YYYY')
-        filtered_status['created_at'] = created_at.datetime
-        filtered_status['user'] = filtered_status['user']['screen_name']
-        writer.add_document(**filtered_status)
-    writer.commit()
+    with TweetIndex.writer() as writer:
+        # Could also use some concurrent processing
+        for status in statuses:
+            status['created_at'] = (arrow.get(status['created_at'],
+                                              'ddd MMM DD HH:mm:ss ZZ YYYY')
+                                         .datetime)
+            tweet = Tweet(**status)
+            tweet.add_to_index(writer)
+            tweet.save()
 
 
 def load_tweets(method, params):
